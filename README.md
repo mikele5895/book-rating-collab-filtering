@@ -34,6 +34,42 @@ We use the dataset consisting of:
 
 ---
 
+## Algorithm and Implementation Details
+
+1. **Data Cleaning and Filtering**  
+   - Non-numeric or zero ratings are removed.
+   - Only users with ≥10 ratings and books with ≥10 ratings are retained to ensure sufficient overlap.
+
+2. **Train-Test Split**  
+   - Data is randomly split by (User-ID, ISBN) pair.
+
+3. **Matrix Construction**  
+   - A user-item utility matrix is built with users as rows, books as columns, and ratings as values.
+
+4. **Item-Item Similarity Computation**  
+   - Cosine similarity is calculated between items (books) using the transposed matrix.
+
+5. **Prediction Function**  
+   - For each test pair, the model finds the `k` most similar books the user has rated and computes a weighted average of those ratings.
+
+6. **Evaluation**  
+   - Performance is measured using **Mean Absolute Difference (MAD)** between predicted and actual ratings.
+
+---
+
+## Dependencies and Libraries
+
+The following Python libraries are used in this project:
+
+- `pandas` – data loading and manipulation  
+- `numpy` – numeric computations (e.g., vector operations)  
+- `scikit-learn` – for `train_test_split` and cosine similarity  
+- `tqdm` – to display progress bars for evaluations
+
+All dependencies are listed in the `requirements.txt` and already installed in the included `venv`.
+
+---
+
 ## How to Run (VSCode Setup)
 
 > A preconfigured Python `venv` environment is included, but steps are provided below in case you need to reproduce it.
